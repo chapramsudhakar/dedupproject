@@ -1,0 +1,177 @@
+#ifndef __CACHESIZE_H__
+#define __CACHESIZE_H__
+
+using namespace std;
+
+#include "dedupconfig.h"
+#include "dedupn.h"
+
+#ifdef	WORK2
+// ======= Cache sizes for second work =======
+// ======= Expressed in terms of Working set size =========
+//#define	METACPERCENT 4
+		const long int DATA_CACHE_SIZE = ((((WSS*CPERCENT)/100L*960)/1000) * 1024);
+
+//		const long int  BUCKET_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L* 70)/1000) * 1024) / SNCOUNT;
+//		const long int BUCKET_CACHE_SIZE3 = ((((WSS*CPERCENT*2L)/25/100L*250)/1000) * 1024) / SNCOUNT;
+		const long int BUCKET_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L*250)/1000) * 1024) / SNCOUNT;
+//		const long int HBUCKET_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L* 16)/1000) * 1024) / SNCOUNT;
+//		const long int HBUCKET_CACHE_SIZE3 = ((((WSS*CPERCENT*2L)/25/100L* 39)/1000) * 1024) / SNCOUNT;
+		const long int HBUCKET_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L* 39)/1000) * 1024) / SNCOUNT;
+		const long int HASHINDEX_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L*312)/1000) * 1024) / SNCOUNT;
+		const long int FHBINDEX_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L*12)/1000) * 1024) / SNCOUNT;
+		const long int BLOCKINDEX_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L*113)/1000) * 1024) / SNCOUNT;
+		const long int BLOCKINDEX_CACHE_SIZE3 = ((((WSS*CPERCENT*2L)/25/100L* 62)/1000) * 1024) / SNCOUNT;
+		const long int BLOCKINDEX_CACHE_SIZE4 = ((((WSS*CPERCENT*2L)/25/100L* 62)/1000) * 1024) / SNCOUNT;
+//		const long int BLOCKIINDEX_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L* 98)/1000) * 1024) / SNCOUNT;
+		const long int BUCKETINDEX_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L*  2)/1000) * 1024) / SNCOUNT;
+		const long int LBA2PBA_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L* 14)/1000) * 1024) / SNCOUNT;
+		const long int PBA2BUCK_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L* 15)/1000) * 1024) / SNCOUNT;
+//		const long int LBA2BUCK_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L*  2)/1000) * 1024) / SNCOUNT;
+		const long int RID_CACHE_SIZE =	((((WSS*CPERCENT*2L)/25/100L*  1)/1000) * 1024) / SNCOUNT;
+		const long int PBAREF_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L* 49)/1000) * 1024) / SNCOUNT;
+		const long int FP_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L* 16)/1000) * 1024) / SNCOUNT;
+		const long int FHB_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L* 16)/1000) * 1024) / SNCOUNT;
+		const long int FILERECIPE_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L* 16)/1000) * 1024) / SNCOUNT;
+		const long int FRECIPE_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L* 1)/1000) * 1024) / SNCOUNT;
+		const long int FBLIST_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L* 16)/1000) * 1024) / SNCOUNT;
+		//const long int WRB_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L*  2)/10000) * 1024) / SNCOUNT;
+		const long int WRB_CACHE_SIZE = (512 * 1024) / SNCOUNT;
+		const long int LPL_CACHE_SIZE = ((((WSS*CPERCENT*2L)/25/100L* 59)/1000) * 1024) / SNCOUNT;
+		const long int HLPL_CACHE_SIZE = ((((WSS*CPERCENT*1L)/25/100L* 1)/1000) * 1024) / SNCOUNT;
+
+#endif
+/*******************************************
+#else
+// ======= Cache sizes for first work =======
+#ifndef	TRACE15
+// If not checking for trace 15 (not to compare with POD)
+	//======================= NOT WEB TRACES ==========================
+	// 10 % of 524288+x KB ==> ~52428 KB
+	#ifndef	WEB
+		#define DATA_CACHE_SIZE		(512*1024*1024)
+
+		#define BUCKET_CACHE_SIZE	(18*1024*4*1024)
+		#define BUCKET_CACHE_SIZE3	(64*1024*4*1024)
+		#define HBUCKET_CACHE_SIZE	(4*1024*4*1024)
+		#define HBUCKET_CACHE_SIZE3	(10*1024*4*1024)
+		#define HASHINDEX_CACHE_SIZE	(80*1024*4*1024)
+		#define BLOCKINDEX_CACHE_SIZE	(29*1024*4*1024)
+		#define BLOCKINDEX_CACHE_SIZE3	(16*1024*4*1024)
+		#define BLOCKIINDEX_CACHE_SIZE	(25*1010*4*1024)
+		#define BUCKETINDEX_CACHE_SIZE	(1024*2*1024)
+		#define LBA2PBA_CACHE_SIZE	(10*1024*1024)
+		#define PBA2BUCK_CACHE_SIZE	(10*1024*1024)
+		#define LBA2BUCK_CACHE_SIZE	(512*1024)
+		#define RID_CACHE_SIZE		(1024*1024)
+		#define PBAREF_CACHE_SIZE	(50*1024*1024)
+		#define FP_CACHE_SIZE		(16*1024*1024)
+		#define WRB_CACHE_SIZE		(192*1024)
+		#define LPL_CACHE_SIZE		(48*1024*1024)
+	#else
+
+	//========================== WEB TRACES ==============================
+		#define DATA_CACHE_SIZE		(192*1024*1024)
+
+		#define BUCKET_CACHE_SIZE	(9*1024*2*1024)
+		#define BUCKET_CACHE_SIZE3	(21*1024*1*1024)
+		#define HBUCKET_CACHE_SIZE	(1*1024*2*1024)
+		#define HBUCKET_CACHE_SIZE3	(2*1024*2*1024)
+		#define HASHINDEX_CACHE_SIZE	(12*1024*2*1024)
+		#define BLOCKINDEX_CACHE_SIZE	(8*1024*2*1024)
+		#define BLOCKINDEX_CACHE_SIZE3	(5*1024*1*1024)
+		#define BLOCKIINDEX_CACHE_SIZE	(6*1010*4*1024)
+		#define BUCKETINDEX_CACHE_SIZE	(512*1*1024)
+		#define LBA2PBA_CACHE_SIZE	(2*1024*1024)
+		#define PBA2BUCK_CACHE_SIZE	(1750*1024)
+		#define LBA2BUCK_CACHE_SIZE	(2*1024*1024)
+		#define RID_CACHE_SIZE		(256*1024)
+		#define PBAREF_CACHE_SIZE	(2*1024*1024)
+		#define FP_CACHE_SIZE		(4*1024*1024)
+		#define WRB_CACHE_SIZE		(192*1024)
+		#define LPL_CACHE_SIZE		(4*1024*1024)
+	#endif
+#else
+// If only 15 traces are used to compare with POD
+////////       TRACE 15  TRACE 15   TRACE 15  BEGIN //////////////
+	#ifndef	WEB
+		#define DATA_CACHE_SIZE		(250*1024*1024)
+
+		#define BUCKET_CACHE_SIZE	(9*1024*4*1024)
+		#define BUCKET_CACHE_SIZE3	(27*1024*4*1024)
+		#define HBUCKET_CACHE_SIZE	(2*1024*4*1024)
+		#define HBUCKET_CACHE_SIZE3	(4*1024*4*1024)
+		#define HASHINDEX_CACHE_SIZE	(39*1024*4*1024)
+		#define BLOCKINDEX_CACHE_SIZE	(15*1024*4*1024)
+		#define BLOCKINDEX_CACHE_SIZE3	(10*1024*4*1024)
+		#define BLOCKIINDEX_CACHE_SIZE	(12*1010*4*1024)
+		#define BUCKETINDEX_CACHE_SIZE	(1024*1*1024)
+		#define LBA2PBA_CACHE_SIZE	(6*1024*1024)
+		#define PBA2BUCK_CACHE_SIZE	(6*1024*1024)
+		#define LBA2BUCK_CACHE_SIZE	(256*1024)
+		#define RID_CACHE_SIZE		(512*1024)
+		#define PBAREF_CACHE_SIZE	(21*1024*1024)
+		#define FP_CACHE_SIZE		(8*1024*1024)
+		#define WRB_CACHE_SIZE		(192*1024)
+		#define LPL_CACHE_SIZE		(25*1024*1024)
+	#else
+	//========================== WEB TRACES ==============================
+		#define DATA_CACHE_SIZE		(50*1024*1024)
+
+		#define BUCKET_CACHE_SIZE	(8*1024*2*1024)
+		#define BUCKET_CACHE_SIZE3	(24*1024*1*1024)
+		#define HBUCKET_CACHE_SIZE	(2*1024*1*1024)
+		#define HBUCKET_CACHE_SIZE3	(4*1024*1*1024)
+		#define HASHINDEX_CACHE_SIZE	(12*1024*2*1024)
+		#define BLOCKINDEX_CACHE_SIZE	(8*1024*2*1024)
+		#define BLOCKINDEX_CACHE_SIZE3	(4*1024*1*1024)
+		#define BLOCKIINDEX_CACHE_SIZE	(4*1010*4*1024)
+		#define BUCKETINDEX_CACHE_SIZE	(512*1*1024)
+		#define LBA2PBA_CACHE_SIZE	(2*1024*1024)
+		#define PBA2BUCK_CACHE_SIZE	(2048*1024)
+		#define LBA2BUCK_CACHE_SIZE	(2*1024*1024)
+		#define RID_CACHE_SIZE		(512*1024)
+		#define PBAREF_CACHE_SIZE	(4*1024*1024)
+		#define FP_CACHE_SIZE		(4*1024*1024)
+		#define WRB_CACHE_SIZE		(192*1024)
+		#define LPL_CACHE_SIZE		(5*1024*1024)
+	#endif
+
+	////////       TRACE 15  TRACE 15   TRACE 15  END //////////////
+#endif
+
+
+#endif
+****************************************************/
+
+#define DATA_CACHE_SIZE_NATIVE	(DATA_CACHE_SIZE + HASHINDEX_CACHE_SIZE + BLOCKINDEX_CACHE_SIZE + LBA2PBA_CACHE_SIZE + PBAREF_CACHE_SIZE + FP_CACHE_SIZE + WRB_CACHE_SIZE)
+
+
+#define DATA_CACHE_LIST         (500000)
+#define LDC_CACHE_LIST          (512)
+#define BUCKET_CACHE_LIST       (25000)
+#define HBUCKET_CACHE_LIST      (4000)
+#define HASHINDEX_CACHE_LIST    (30000)
+#define BLOCKINDEX_CACHE_LIST   (12000)
+//#define BLOCKIINDEX_CACHE_LIST  (50000)
+#define BUCKETINDEX_CACHE_LIST  (512)
+#define FILERECIPE_CACHE_LIST	(25000)
+//#define LBA2PBA_CACHE_LIST      (400000)
+//#define PBA2BUCK_CACHE_LIST     (400000)
+//#define LBA2BUCK_CACHE_LIST     (400000)
+//#define PBA2HBUCK_CACHE_LIST    (100000)
+//#define PBAREF_CACHE_LIST       (400000)
+//#define FP_CACHE_LIST           (8192)
+//#define FPB_CACHE_LIST          (50000)
+//#define LBP_CACHE_LIST          (50000)
+//#define HP_CACHE_LIST           (50000)
+//#define RID_CACHE_LIST          (5000)
+//#define WRB_CACHE_LIST          (100)
+//#define LPL_CACHE_LIST          (100000)
+
+//#define HASH_BUCK_COUNT		65536
+#define B512M_1			((BUCKET_CACHE_SIZE/512 + HBUCKET_CACHE_SIZE/512 + 2 * BLOCKINDEX_CACHE_SIZE3/512 + BUCKETINDEX_CACHE_SIZE/512 + FILERECIPE_CACHE_SIZE/512) + 100) 
+#define B512M_2			((HASHINDEX_CACHE_SIZE/512 + BLOCKINDEX_CACHE_SIZE/512) + 100)
+#define	B512MCOUNT		((B512M_1 > B512M_2) ? B512M_1 : B512M_2)
+
+#endif
